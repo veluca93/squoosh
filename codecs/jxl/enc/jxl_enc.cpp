@@ -57,10 +57,13 @@ val encode(std::string image, int width, int height, JXLOptions options) {
     }
   }
 
-  if (options.progressive) {
+  if (options.progressive && !cparams.modular_mode) {
     cparams.qprogressive_mode = true;
     cparams.progressive_dc = 1;
     cparams.responsive = 1;
+  } else {
+    cparams.responsive = 1;
+    cparams.progressive_mode = true;
   }
 
   if (cparams.modular_mode) {
